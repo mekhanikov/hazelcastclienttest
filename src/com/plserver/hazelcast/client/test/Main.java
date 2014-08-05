@@ -16,10 +16,11 @@ public class Main {
 		ITopic<String> topic = hcclient.getTopic (cellInfoTopic);
 		CellEventListener cellEventListener = new CellEventListener(hcclient);
 		topic.addMessageListener(cellEventListener);
-		for (int i=0; i<20; i++) {
+		for (int i=0; i<200; i++) {
 			topic.publish(new String("some string"));
-			Thread.sleep(50);// if <=4 - hang up, otherwise - it is ok.
+//			Thread.sleep(50);// TODO if uncomment it stops to hang up.
 		}
+		// BUG!!!: we will never be here because publish() hangs up.
 		System.out.println("EXIT");
 	}
 }
